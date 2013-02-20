@@ -4,17 +4,19 @@
 
 -export([start_vnode/1,
          init/1,
-         terminate/2,
          handle_command/3,
-         is_empty/1,
-         delete/1,
-         handle_handoff_command/3,
+         handle_coverage/4,
+         handle_exit/3,
          handoff_starting/2,
          handoff_cancelled/1,
          handoff_finished/2,
+         handle_handoff_command/3,
          handle_handoff_data/2,
          encode_handoff_item/2,
-         handle_exit/3]).
+         is_empty/1,
+         terminate/2,
+         delete/1
+     ]).
 
 -record(state, {partition}).
 
@@ -30,6 +32,9 @@ handle_command(ping, _Sender, State) ->
     {reply, {pong, State#state.partition}, State};
 handle_command(Message, _Sender, State) ->
     ?PRINT({unhandled_command, Message}),
+    {noreply, State}.
+
+handle_coverage(_Message, _KeySpaces, _Sender, State) ->
     {noreply, State}.
 
 handle_handoff_command(_Message, _Sender, State) ->
