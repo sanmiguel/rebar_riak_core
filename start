@@ -1,0 +1,36 @@
+#!/bin/sh
+
+for i in 1 2 3; do
+    ./dev/dev${i}/bin/{{appid}} start
+done
+
+check_count=5
+i=1
+while [ $i -lt 4 -a $check_count -gt 0 ]; do
+
+    echo "Checking node $i"
+    res=$(./dev/dev${i}/bin/{{appid}} ping)
+    if [ "$res" = "pong" ]; then
+        i=$(( i + 1 ))
+        continue
+
+    else
+        echo "Ping node $i got: $res"
+    fi
+
+    sleep 5
+    check_count=$(( check_count - 1 ))
+done;
+
+if [ $check_count -eq 0 ]; then
+    echo "Nodes not up!" >&2
+    exit 1
+fi
+
+for i in 2 3; do
+    ./dev/dev${i}/bin/{{appid}}-admin join {{appid}}1@127.0.0.1
+done
+
+sleep 5
+
+./dev/dev1/bin/{{appid}}-admin member_status
