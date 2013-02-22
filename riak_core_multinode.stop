@@ -1,0 +1,6 @@
+#!/bin/bash
+
+numnodes=3
+for i in $(seq 1 $numnodes); do
+    ./dev/dev${i}/bin/{{appid}} stop
+done

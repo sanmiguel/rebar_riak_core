@@ -15,7 +15,7 @@
 {template, "riak_core.app.src", "apps/{{appid}}/src/{{appid}}.app.src"}.
 {template, "riak_core_app.erl", "apps/{{appid}}/src/{{appid}}_app.erl"}.
 {template, "riak_core.erl", "apps/{{appid}}/src/{{appid}}.erl"}.
-{template, "riak_core.hrl", "apps/{{appid}}/src/{{appid}}.hrl"}.
+{template, "riak_core.hrl", "apps/{{appid}}/include/{{appid}}.hrl"}.
 {template, "riak_core_sup.erl", "apps/{{appid}}/src/{{appid}}_sup.erl"}.
 {template, "riak_core_vnode.erl", "apps/{{appid}}/src/{{appid}}_vnode.erl"}.
 {template, "riak_core_ring_handler.erl", "apps/{{appid}}/src/{{appid}}_ring_event_handler.erl"}.
@@ -23,6 +23,8 @@
 {template, "riak_core.gitignore", ".gitignore"}.
 
 %% rest of multinode stuff
+{template, "riak_core_multinode.start", "start"}.
+{template, "riak_core_multinode.stop", "stop"}.
 {template, "riak_core_multinode.rebar.config", "rebar.config"}.
 {template, "riak_core_multinode.Makefile", "Makefile"}.
 {template, "riak_core_multinode.admin-runner", "rel/files/{{nodeid}}-admin"}.
